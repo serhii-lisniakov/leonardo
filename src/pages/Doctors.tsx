@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from "react";
+import React, {useCallback, useContext, useEffect, useState} from "react";
 import {useSearchParams} from "react-router-dom";
 import styled from "styled-components";
 import {Card, Container, FlexWrapper, Progress, Section, TextPrimary, Title} from "../components/components";
@@ -84,16 +84,16 @@ export const Doctors: React.FC = () => {
         setCity(cityParam.get(QueryTypes.City) || '');
     })
 
-    const getAll = () => {
+    const getAll = useCallback(() => {
         const array = db?.clinics.map(i => i.doctors).filter(i => i).flat() || [];
         return Array.from(new Map(array.map(item => [item.avatar + item.name + item.title, item])).values());
-    }
+    }, [db?.clinics])
 
     useEffect(() => {
         const clinic = db?.clinics.find(c => c.title === city);
         setData(clinic || null);
         setDoctors(city ? clinic?.doctors || [] : getAll());
-    }, [city])
+    }, [city, db?.clinics, getAll])
 
     return (
         <>

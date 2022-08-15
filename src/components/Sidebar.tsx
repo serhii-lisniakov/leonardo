@@ -140,7 +140,7 @@ export const Sidebar: React.FC<SidebarProps> = ({open, overlayRef, setOpen}) => 
     useEffect(() => {
         setOpen(false);
         document.body.classList.remove('side-bar-opened');
-    }, [location]);
+    }, [location, setOpen]);
 
     return (
         <Overlay open={open}>

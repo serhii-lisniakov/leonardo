@@ -89,7 +89,7 @@ export const Prices: React.FC = () => {
         const clinic = db?.clinics.find(c => c.title === city);
         setData(clinic || null);
         setPrices(clinic?.prices || []);
-    }, [city])
+    }, [city, db?.clinics])
 
     useEffect(() => {
         if (!data) {

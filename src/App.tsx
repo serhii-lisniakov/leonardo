@@ -72,7 +72,7 @@ function App() {
         } catch {
             setState(null)
         }
-    }, []);
+    }, [database]);
 
     return (
         <DBContext.Provider value={state}>

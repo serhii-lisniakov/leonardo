@@ -1,5 +1,5 @@
 import React from "react"
-import {FlexWrapper, FlexWrapperCenter, StyledLink} from "./components";
+import {FlexWrapper, StyledLink} from "./components";
 import styled from "styled-components";
 import theme from "../styles/theme";
 import {Social} from "../db/types";
