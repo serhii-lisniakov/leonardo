@@ -1,10 +1,11 @@
 import styled from "styled-components";
 import React, {Dispatch, SetStateAction, useEffect} from "react";
-import {navigation} from "../db/havigation";
 import {NavLink} from "./Header";
 import {useLocation} from "react-router-dom";
 import {FlexWrapper, Image, RouterLink} from "./components";
 import LogoHorizontal from "../assets/logo-horizontal.jpg";
+import {ATTR_LOGO} from "../db/constants";
+import useNavigation from "../hooks/useNavidation";
 
 const NAVBAR_WIDTH = 300;
 
@@ -136,6 +137,7 @@ type SidebarProps = {
 
 export const Sidebar: React.FC<SidebarProps> = ({open, overlayRef, setOpen}) => {
     const location = useLocation();
+    const navigation = useNavigation();
 
     useEffect(() => {
         setOpen(false);
@@ -148,7 +150,7 @@ export const Sidebar: React.FC<SidebarProps> = ({open, overlayRef, setOpen}) => 
             <StyledMenu>
                 <FlexWrapper>
                     <RouterLink to={'/'}>
-                        <StyledLogo src={LogoHorizontal} alt={'leonardo medicalis logo'}/>
+                        <StyledLogo src={LogoHorizontal} alt={ATTR_LOGO}/>
                     </RouterLink>
                     <Burger open={open} setOpen={setOpen}/>
                 </FlexWrapper>

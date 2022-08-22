@@ -41,6 +41,10 @@ export const Container = styled.div`
   fieldset {
     border-color: currentColor !important;
   }
+
+  @media (max-width: 789px) {
+    padding: 0 1em;
+  }
 `;
 
 export const RelativeContainer = styled.div`

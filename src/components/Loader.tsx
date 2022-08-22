@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Logo from "../assets/logo.png";
+import {ATTR_LOGO} from "../db/constants";
 
 const StyledLoader = styled.div`
   position: absolute;
@@ -39,7 +40,7 @@ const StyledLoader = styled.div`
 export const Loader: React.FC = () => {
     return (
         <StyledLoader>
-            <img src={Logo} alt={'leonardo logo'}/>
+            <img src={Logo} alt={ATTR_LOGO}/>
         </StyledLoader>
     )
 }

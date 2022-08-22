@@ -56,7 +56,7 @@ export const Booking: React.FC = () => {
     const [errors, setErrors] = useState<any>(initialErrors);
     const [progress, setProgress] = useState(false);
     const [success, setSuccess] = useState<boolean | null>(null);
-    const db = useContext(DBContext);
+    const {clinics, admin} = useContext(DBContext) || {};
 
     const clear = () => {
         setTimeout(() => {
@@ -76,10 +76,10 @@ export const Booking: React.FC = () => {
         setProgress(true);
         try {
             await emailjs.send(
-                'service_5xeebdm',
-                'template_nqptnxv',
+                admin?.booking.serviceID as string,
+                admin?.booking.templateID as string,
                 form,
-                'p3WU0iegpzRiYop-o'
+                admin?.booking.publicKey as string,
             )
             setProgress(false);
             setSuccess(true);
@@ -110,7 +110,7 @@ export const Booking: React.FC = () => {
                             fullWidth
                             required
                             name="name"
-                            label="Ім'я Прізвище"
+                            label={admin?.contactForm.name}
                             variant='standard'
                             value={form.name}
                             onChange={handleChange}
@@ -129,21 +129,21 @@ export const Booking: React.FC = () => {
                                 fullWidth
                                 required
                                 name="phone"
-                                label="Номер телефону"
+                                label={admin?.contactForm.phone}
                                 variant='standard'
                             />
                         </InputMask>
                         <FormControl variant="standard" fullWidth>
-                            <InputLabel id="clinic">Відділення</InputLabel>
+                            <InputLabel id="clinic">{admin?.contactForm.clinic}</InputLabel>
                             <Select
                                 fullWidth
                                 labelId="clinic"
                                 name="clinic"
-                                label="Відділення"
+                                label={admin?.contactForm.clinic}
                                 value={form.clinic}
                                 onChange={handleChange}
                             >
-                                {db?.clinics.map((c, i) => (
+                                {clinics?.map((c, i) => (
                                     <MenuItem value={c.title} key={i}>{c.title}</MenuItem>
                                 ))}
                             </Select>
@@ -151,7 +151,7 @@ export const Booking: React.FC = () => {
                         <TextField
                             fullWidth
                             name="message"
-                            label="Ваш коментар"
+                            label={admin?.contactForm.message}
                             variant='standard'
                             value={form.message}
                             onChange={handleChange}
@@ -162,8 +162,8 @@ export const Booking: React.FC = () => {
                         />
 
                         {success !== null && <Message success={success}>
-                            {success && <Title>Надіслано!</Title>}
-                            {!success && <Title>Помилка при надсиланні. Спробуйте ще раз</Title>}
+                            {success && <Title>{admin?.contactForm.success}</Title>}
+                            {!success && <Title>{admin?.contactForm.failure}</Title>}
                         </Message>}
                     </StyledForm>
                 </Container>

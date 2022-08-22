@@ -52,7 +52,7 @@ export type Direction = {
 }
 
 export type DB = {
-    mainBanner: string;
+    banners: string[];
     email: string;
     aboutTitle: string;
     aboutBody: string;
@@ -68,4 +68,27 @@ export type DB = {
     devicesTitle: string;
     clinics: Clinic[];
     schedule: Schedule;
+    admin: {
+        chooseAddress: string;
+        booking: {
+            serviceID: string;
+            templateID: string;
+            publicKey: string;
+        },
+        contactForm: {
+            name: string;
+            phone: string;
+            clinic: string;
+            message: string;
+            success: string;
+            failure: string;
+        },
+        navigation: {
+            home: string;
+            doctors: string;
+            prices: string;
+            clinics: string;
+            book: string;
+        }
+    }
 }

@@ -29,7 +29,7 @@ export const CitySelector: React.FC = () => {
                     onChange={handleChange}
                     fullWidth
                     displayEmpty
-                    renderValue={(value) => value ? value : <em>Виберіть місто</em>}
+                    renderValue={(value) => value ? value : <em>{db?.admin.chooseAddress}</em>}
                 >
                     {db?.clinics.map((c, i) => (
                         <MenuItem value={c.title} key={i}>{c.title}</MenuItem>

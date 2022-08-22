@@ -1,5 +1,5 @@
 export type Navigation = {
-    title?: string;
+    title: string;
     url: string;
     icon?: string;
     preserveQuery?: boolean;

@@ -3,12 +3,14 @@ import styled, {css} from "styled-components";
 import List from "@mui/material/List";
 import Popover from "@mui/material/Popover";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import {Navigation, navigation} from "../db/havigation";
+import {Navigation} from "../db/havigation";
 import LogoHorizontal from "../assets/logo-horizontal.jpg";
 import {ButtonPrimary, Container, FlexWrapper, Icon, Image, RouterLink, Section} from "./components";
 import useOnClickOutside from "../hooks/useOnClickOutside";
 import {Burger, Sidebar} from "./Sidebar";
 import {useLocation, useMatch, useResolvedPath} from "react-router-dom";
+import {ATTR_LOGO} from "../db/constants";
+import useNavigation from "../hooks/useNavidation";
 
 const StyledList = styled(List)`
   display: flex;
@@ -32,7 +34,7 @@ const StyledLogo = styled(Image)`
 const FixedHeader = styled(Section)<{ isShrunk: boolean }>`
   position: sticky;
   top: 0;
-  z-index: 1;
+  z-index: 2;
   background: ${({theme}) => theme.header};
   transition: all .3s;
   box-shadow: 0 -3px 10px rgba(50, 50, 50, 0.75);
@@ -105,6 +107,7 @@ export const Header: React.FC = () => {
     const media1100 = useMediaQuery('(max-width: 1100px)');
     const [open, setOpen] = useState(false);
     const overlay = useRef<HTMLDivElement>(null);
+    const navigation = useNavigation();
 
     useOnClickOutside(overlay, () => {
         setOpen(false);
@@ -131,7 +134,7 @@ export const Header: React.FC = () => {
         return () => window.removeEventListener("scroll", handler);
     }, []);
 
-    const navItems = () => {
+    const NavItems = () => {
         if (media1100) {
             return <Burger open={open} setOpen={setOpen}/>;
         }
@@ -161,10 +164,10 @@ export const Header: React.FC = () => {
                 <Container>
                     <FlexWrapper as='header'>
                         <RouterLink to={'/'}>
-                            <StyledLogo src={LogoHorizontal} alt={'leonardo logo'}/>
+                            <StyledLogo src={LogoHorizontal} alt={ATTR_LOGO}/>
                         </RouterLink>
                         <FlexWrapper as="nav">
-                            {navItems()}
+                            {NavItems()}
                         </FlexWrapper>
                     </FlexWrapper>
                 </Container>

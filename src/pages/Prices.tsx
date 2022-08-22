@@ -37,6 +37,11 @@ const Item = styled.div`
   align-items: center;
   word-break: break-word;
   text-transform: uppercase;
+
+  @media (max-width: 789px) {
+    padding: 0.5em 1em;
+    gap: 0;
+  }
 `;
 
 const Group = styled(Item)`
@@ -71,6 +76,11 @@ const DevicesWrapper = styled(ParagraphPrimary)`
     padding-bottom: 0.5em;
     border-bottom: 1px solid ${({theme}) => theme.colorSecondary};
   }
+`;
+
+const PriceNumber = styled(TextPrimary)`
+  text-align: center;
+  min-width: 60px;
 `;
 
 export const Prices: React.FC = () => {
@@ -123,7 +133,7 @@ export const Prices: React.FC = () => {
             {!!isGroup && <Icon>{'scatter_plot'}</Icon>}
             <TextPrimary>{highlightText(title)}</TextPrimary>
             <Separator style={{marginLeft: 'auto'}} dark={true}/>
-            <TextPrimary style={{minWidth: '60px', textAlign: 'center'}}>{price}</TextPrimary>
+            <PriceNumber>{price}</PriceNumber>
         </StyledItemPrice>
         {prices?.map((item, i) => <ItemPrice key={i} {...item} isGroup={true}/>)}
     </>)

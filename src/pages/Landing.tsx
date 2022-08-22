@@ -19,8 +19,8 @@ export const Landing: React.FC = () => {
 
     return (
         <>
-            {db?.mainBanner && <Banner banner={db?.mainBanner}/>}
             <Home/>
+            {db?.banners && <Banner banners={db?.banners}/>}
             <Book submit={goToBooking}/>
             <Benefits/>
             <Directions/>
